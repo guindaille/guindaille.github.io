@@ -7,10 +7,6 @@ export const SITE = {
 };
 
 export const NAV_ITEMS: NavItems = {
-  home: {
-    path: "/",
-    title: "home"
-  },
   blog: {
     path: "/blog",
     title: "blog"

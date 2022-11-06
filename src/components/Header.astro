@@ -6,7 +6,7 @@ import { toTitleCase } from '$/utils';
 
 <header>
 	<h2>
-		{SITE.title}
+		<HeaderLink href="/" class="unstyled">{toTitleCase(SITE.title)}</HeaderLink>
 	</h2>
 	<nav>
 		{Object.values(NAV_ITEMS).map(item => {
