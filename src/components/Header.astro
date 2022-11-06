@@ -1,6 +1,7 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE } from '$/config';
+import { NAV_ITEMS, SITE } from '$/config';
+import { toTitleCase } from '$/utils';
 ---
 
 <header>
@@ -8,9 +9,9 @@ import { SITE } from '$/config';
 		{SITE.title}
 	</h2>
 	<nav>
-		<HeaderLink href="/">Home</HeaderLink>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
+		{Object.values(NAV_ITEMS).map(item => {
+			return <HeaderLink href={item.path}>{toTitleCase(item.title)}</HeaderLink>;
+		})}
 	</nav>
 </header>
 <style>
