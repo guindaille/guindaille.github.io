@@ -8,7 +8,7 @@ const { content, showPageHeader = true } = Astro.props
 const pageTitle = content.title ? `${content.title} 🍺 ${SITE.name}` : SITE.name;
 ---
 
-<html lang="en">
+<html lang="{SITE.lang}">
 	<head>
 		<BaseHead
 			title={ pageTitle }

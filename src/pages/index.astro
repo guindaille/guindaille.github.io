@@ -3,16 +3,15 @@ import PostPreviewList from "$/components/PostPreviewList.astro";
 import Layout from "$/layouts/base.astro";
 
 const content = {
-  title: "Home",
-  description: "Home",
+  description: "Accueil",
 };
 
 const posts = await Astro.glob("./blog/*.md");
 ---
 
 <Layout content={content}>
-    Welcome!
+    Bienvenue sur le blog de Guindaille Beer Crafting!
 
-    <h2>Latest Posts</h2>
+    <h2>Derniers articles publiés</h2>
     <PostPreviewList posts={posts.slice(0,3)} />
 </Layout>
