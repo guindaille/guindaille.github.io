@@ -12,4 +12,7 @@ const posts = await Astro.glob("./blog/*.md");
 
 <Layout content={content}>
     Welcome!
+
+    <h2>Latest Posts</h2>
+    <PostPreviewList posts={posts.slice(0,3)} />
 </Layout>
