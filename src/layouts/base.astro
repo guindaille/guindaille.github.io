@@ -1,0 +1,26 @@
+---
+import BaseHead from '$/components/BaseHead.astro';
+import Header from '$/components/Header.astro';
+import Footer from '$/components/Footer.astro';
+import { SITE } from '$/config';
+
+const { content, showPageHeader = true } = Astro.props
+const pageTitle = `${content.title || ""} 🍺 ${SITE.name}`.trim();
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title={ pageTitle }
+			description={ content.description }
+		/>
+	</head>
+
+	<body>
+		{ showPageHeader && <Header /> }
+		<main>
+				<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
