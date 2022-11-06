@@ -5,7 +5,7 @@ import Footer from '$/components/Footer.astro';
 import { SITE } from '$/config';
 
 const { content, showPageHeader = true } = Astro.props
-const pageTitle = `${content.title || ""} 🍺 ${SITE.name}`.trim();
+const pageTitle = content.title ? `${content.title} 🍺 ${SITE.name}` : SITE.name;
 ---
 
 <html lang="en">
