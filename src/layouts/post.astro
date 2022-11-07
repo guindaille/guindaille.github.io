@@ -5,6 +5,7 @@ export interface Props {
 	content: {
 		title: string;
 		description: string;
+		tags: string[];
 		created?: string;
 		updated?: string;
 		heroImage?: string;
@@ -12,13 +13,21 @@ export interface Props {
 }
 
 const {
-	content: { title, description, created, updated, heroImage },
+	content: { title, description, tags, created, updated, heroImage },
 } = Astro.props;
 ---
 <BaseLayout content={{title, description}}>
   <article>
     {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-    <h1 class="title">{title}</h1>
+    <p>
+      <small>
+        étiquettes: {tags.map((tag) => (
+          <i>
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </i>
+        ))}
+      </small>
+    </p>
     {created && <time>{created}</time>}
     {updated && (
       <div>
