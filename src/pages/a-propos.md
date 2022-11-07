@@ -44,4 +44,4 @@ Il devrait idéalement répondre aux critères suivants:
 - **une seule cuve** (restons [K.I.S.S.](https://fr.wikipedia.org/wiki/Principe_KISS)),
 - **peu cher**, peuchère!
 
-Rendez-vous du côté [des articles](./blog) pour voir l'état d'avancement ;-)
+Rendez-vous du côté [des articles](/blog) pour voir l'état d'avancement ;-)
