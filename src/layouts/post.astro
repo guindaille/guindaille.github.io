@@ -19,15 +19,17 @@ const {
 <BaseLayout content={{title, description}}>
   <article>
     {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-    <p>
-      <small>
-        étiquettes: {tags.map((tag) => (
-          <i>
-            <a href={`/tags/${tag}`}>{tag}</a>
-          </i>
-        ))}
-      </small>
-    </p>
+    {tags && (
+      <p>
+        <small>
+          étiquettes: {tags.map((tag) => (
+            <i>
+              <a href={`/tags/${tag}`}>{tag}</a>
+            </i>
+          ))}
+        </small>
+      </p>
+    )}
     {created && <time>{created}</time>}
     {updated && (
       <div>
