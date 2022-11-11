@@ -1,17 +1,13 @@
 ---
+import BaseLayout from "$/layouts/BaseLayout.astro";
 import PostPreviewList from "$/components/PostPreviewList.astro";
-import Layout from "$/layouts/base.astro";
 
-const content = {
-  description: "Accueil",
-};
-
-const posts = await Astro.glob("./blog/*.md");
+const content = { description: "Accueil" };
 ---
 
-<Layout content={content}>
+<BaseLayout content={content}>
     Bienvenue sur le blog de Guindaille Beer Crafting!
 
     <h2>Derniers articles publiés</h2>
-    <PostPreviewList posts={posts.slice(0,3)} />
-</Layout>
+    <PostPreviewList take={3} />
+</BaseLayout>

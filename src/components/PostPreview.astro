@@ -1,21 +1,26 @@
 ---
-import { getMonthName } from '$/utils'
-const { frontmatter: post, url } = Astro.props.post
+import { getPostData } from "$/utils";
+
+const { post } = Astro.props;
+const { title, description, publishedDate } = post.frontmatter;
+const date = new Date(publishedDate);
+const day = date.toLocaleDateString("fr-BE", { day: "numeric" });
+const monthNYear = date.toLocaleDateString("fr-BE", { month: "long", year: "numeric" });
+const { slug } = getPostData(post);
+const href = `/blog/${slug}`;
 ---
 <div class="post-preview">
     <div class="sm:w-20 md:w-32">
         <div class="post-preview__date">
-            <span class="post-preview__date__day">{ new Date(post.created).getDate() }</span>
-            <span class="post-preview__date__month-n-year">{ `${getMonthName(post.created)} ${new Date(post.created).getFullYear()}` }</span>
+            <span class="post-preview__date__day">{day}</span>
+            <span class="post-preview__date__month-n-year">{monthNYear}</span>
         </div>
     </div>
     <div class="flex-1">
         <h4 class="post-preview__title">
-            <a href={url} title={post.title}>{post.title}</a>
+            <a href={href} title={title}>{title}</a>
         </h4>
-        <p class="post-preview__desc">
-            {post.description}
-        </p>
+        <p class="post-preview__desc">{description}</p>
     </div>
 </div>
 <style>

@@ -1,5 +1,5 @@
 ---
-layout: $/layouts/base.astro
+layout: $/layouts/BaseLayout.astro
 title: À propos
 description: À propos
 ---

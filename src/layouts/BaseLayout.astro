@@ -4,7 +4,7 @@ import Header from '$/components/Header.astro';
 import Footer from '$/components/Footer.astro';
 import { SITE } from '$/config';
 
-const { content, showPageHeader = true } = Astro.props
+const { content, showPageHeader = true } = Astro.props;
 const pageTitle = content.title ? `${content.title} 🍺 ${SITE.name}` : SITE.name;
 ---
 

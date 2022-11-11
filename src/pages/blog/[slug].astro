@@ -1,0 +1,53 @@
+---
+import BaseLayout from "$/layouts/BaseLayout.astro";
+import { PostMetadata } from "$/types";
+import { getPostData } from "$/utils";
+import { MarkdownInstance } from "astro";
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../../data/blog-posts/*.md");
+  return posts.map(p => ({
+    params: { slug: getPostData(p).slug },
+    props: { post: p },
+  }));
+}
+export interface Props {
+	post: MarkdownInstance<PostMetadata>;
+}
+
+const { post } = Astro.props;
+const { readingTime, slug } = getPostData(post);
+const permalink = `/blog/${slug}`;
+const { Content, frontmatter } = post;
+const { title, description, tags, publishedDate, lastEditDate, coverUrl } = frontmatter;
+---
+<BaseLayout content={{title, description}}>
+  <article>
+    {coverUrl && <img width={720} height={360} src={coverUrl} alt="" />}
+    {tags && (
+      <p>
+        <small>
+          étiquettes: {tags.map((tag) => (
+            <i>
+              <a href={`/tags/${tag}`}>{tag}</a>
+            </i>
+          ))}
+        </small>
+      </p>
+    )}
+    {publishedDate && <time>{publishedDate}</time>}
+    {lastEditDate && (
+      <div>
+        Dernière modification le <time>{lastEditDate}</time>
+      </div>
+    )}
+    <div>
+      Lecture <time>{readingTime}</time>
+    </div>
+    <div>
+      <a href={permalink}>Permalien</a>
+    </div>
+    <hr />
+    <Content />
+  </article>
+</BaseLayout>

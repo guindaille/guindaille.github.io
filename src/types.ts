@@ -10,9 +10,9 @@ export type NavItem = {
 export type PostMetadata = {
   title: string;
   description: string;
-  date: string;
-  created: string;
-  updated: string;
-  slug: string;
-  tags: string[];
+  author: string;
+  tags?: string[];
+  publishedDate?: string;
+  lastEditDate?: string;
+  coverUrl?: string;
 };

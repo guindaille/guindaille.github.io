@@ -1,22 +1,21 @@
 ---
-import DefaultPageLayout from "$/layouts/base.astro";
-import PostPreviewList from "$/components/PostPreviewList.astro";
+import BaseLayout from "$/layouts/BaseLayout.astro";
 import Paginator from "$/components/Paginator.astro";
+import PostPreviewList from "$/components/PostPreviewList.astro";
 import { SITE } from "$/config";
 import { PostMetadata } from "$/types";
+import { getPosts } from "$/utils";
 
 const title = "Blog";
 const description = "All the articles posted so far...";
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await Astro.glob<PostMetadata>("./*.md");
-  const sortedPosts = allPosts.sort((a, b) => (new Date(b.frontmatter.created)).valueOf() - (new Date(a.frontmatter.created)).valueOf());
-    return paginate(sortedPosts, {
-      pageSize: SITE.postsPerPage,
-    })
+  const files = await Astro.glob<PostMetadata>("../../data/blog-posts/*.md");
+  const posts = getPosts(files);
+  return paginate(posts, { pageSize: SITE.postsPerPage });
 }
-const { page } = Astro.props
+const { page } = Astro.props;
 ---
-<DefaultPageLayout content={{ title, description }}>
+<BaseLayout content={{ title, description }}>
     <PostPreviewList posts={page.data} />
     <Paginator page={page} />
-</DefaultPageLayout>
+</BaseLayout>

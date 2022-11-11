@@ -1,10 +1,15 @@
 ---
-import PostPreview from './PostPreview.astro'
-const { posts } = Astro.props
-const sortedPosts = posts.sort((a, b) => (new Date(b.created)).valueOf() - (new Date(a.created)).valueOf());
+import { SITE } from "$/config";
+import { PostMetadata } from "$/types";
+import { getPosts } from "$/utils";
+import PostPreview from "./PostPreview.astro";
+
+const { posts: receivedPosts, take = SITE.postsPerPage } = Astro.props;
+const posts = receivedPosts
+    || getPosts(await Astro.glob<PostMetadata>("../data/blog-posts/*.md"), { take });
 ---
 <section class="post-preview__list">
-    {sortedPosts.map((post) => (
+    {posts.map((post) => (
         <PostPreview post={post}/>
     ))}
 </section>
