@@ -8,13 +8,13 @@ const { posts: receivedPosts, take = SITE.postsPerPage } = Astro.props;
 const posts = receivedPosts
     || getPosts(await Astro.glob<PostMetadata>("../data/blog-posts/*.md"), { take });
 ---
-<section class="post-preview__list">
+<section>
     {posts.map((post) => (
         <PostPreview post={post}/>
     ))}
 </section>
 <style>
-    .post-preview__list {
-        @apply flex flex-col gap-12
+    section {
+        @apply flex flex-col gap-12;
     }
 </style>

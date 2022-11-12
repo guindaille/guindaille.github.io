@@ -1,24 +1,40 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { NAV_ITEMS, SITE } from '$/config';
-import { toTitleCase } from '$/utils';
+import { SITE } from "$/config";
+import { Icon } from "astro-icon";
 ---
 
 <header>
-	<h2>
-		<HeaderLink href="/" class="unstyled">{toTitleCase(SITE.title)}</HeaderLink>
-	</h2>
-	<nav>
-		{Object.values(NAV_ITEMS).map(item => {
-			return <HeaderLink href={item.path}>{toTitleCase(item.title)}</HeaderLink>;
-		})}
-	</nav>
+	<h1 class="title">
+		<a href="/">{ SITE.title }</a>
+	</h1>
+	<div class="meta">
+		<h2>{ SITE.name }</h2>
+		<ul>
+				<li>
+						<a href={ SITE.githubUrl } title={`${ SITE.name }'s GitHub URL`}>
+							<Icon name="fa:github" />
+						</a>
+				</li>
+		</ul>
+	</div>
 </header>
 <style>
-	header {
-		margin: 0em 0 2em;
-	}
-	h2 {
-		margin: 0.5em 0;
-	}
+    header {
+        @apply flex gap-4 py-3 items-center tracking-tighter border-b border-theme-primary;
+    }
+    .title {
+			@apply flex-1 text-theme-primary text-4xl font-extrabold md:text-5xl;
+    }
+		.meta {
+				@apply flex gap-3 font-medium text-theme-gray-light;
+		}
+    .meta ul {
+        @apply flex gap-2;
+    }
+		.meta a {
+			@apply text-theme-accent-dark hover:text-theme-accent-light;
+		}
+		.meta [astro-icon] {
+			@apply w-6 h-6;
+		}
 </style>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "$/layouts/BaseLayout.astro";
+import Prose from "$/components/Prose.astro";
 import { PostMetadata } from "$/types";
 import { getPostData } from "$/utils";
 import { MarkdownInstance } from "astro";
@@ -19,35 +20,65 @@ const { post } = Astro.props;
 const { readingTime, slug } = getPostData(post);
 const permalink = `/blog/${slug}`;
 const { Content, frontmatter } = post;
-const { title, description, tags, publishedDate, lastEditDate, coverUrl } = frontmatter;
+const { author, title, description, tags, publishedDate, lastEditDate, coverUrl } = frontmatter;
 ---
 <BaseLayout content={{title, description}}>
-  <article>
-    {coverUrl && <img width={720} height={360} src={coverUrl} alt="" />}
-    {tags && (
-      <p>
-        <small>
-          étiquettes: {tags.map((tag) => (
-            <i>
-              <a href={`/tags/${tag}`}>{tag}</a>
-            </i>
-          ))}
-        </small>
-      </p>
-    )}
-    {publishedDate && <time>{publishedDate}</time>}
-    {lastEditDate && (
-      <div>
-        Dernière modification le <time>{lastEditDate}</time>
-      </div>
-    )}
-    <div>
-      Lecture <time>{readingTime}</time>
+  <div class="header">
+    <div class="tags">
+      {tags && tags.map((tag) => (
+        <i>
+          <a class="tag" href={`/tags/${tag}`} title={tag}>{tag}</a>
+        </i>
+      ))}
     </div>
-    <div>
-      <a href={permalink}>Permalien</a>
-    </div>
-    <hr />
+    <h1 class="title">{ title }</h1>
+    <h5 class="desc">
+        <span class="author">{ author }</span>
+        {publishedDate && <>
+          | <span class="date">{ new Intl.DateTimeFormat("fr-BE", { dateStyle: "full" }).format(new Date(publishedDate))}</span>
+        </>}
+        {lastEditDate && <>
+          | <span class="date">modifié le { new Intl.DateTimeFormat("fr-BE", { dateStyle: "short" }).format(new Date(lastEditDate))}</span>
+        </>}
+        | <span class="readtime"><time>{readingTime}</time></span>
+        | <span class="permalink"><a href={permalink}>permalien</a></span>
+    </h5>
+  </div>
+  {coverUrl && <img width={720} height={360} src={coverUrl} alt={title} />}
+  <Prose>
     <Content />
-  </article>
+  </Prose>
 </BaseLayout>
+
+<style>
+  .header {
+    @apply py-4 mb-1;
+  }
+  .title {
+    @apply capitalize text-5xl text-theme-primary font-extrabold;
+  }
+  .desc {
+    @apply text-xl;
+  }
+  .author {
+    @apply no-underline;
+  }
+  .date {
+    @apply text-xl;
+  }
+  .readtime {
+    @apply text-xl;
+  }
+  .permalink {
+    @apply text-xl;
+  }
+  .tags {
+    @apply inline-flex gap-2;
+  }
+  .tag {
+    @apply text-sm;
+  }
+  a {
+    @apply text-theme-secondary hover:text-theme-accent-light hover:underline;
+  }
+</style>

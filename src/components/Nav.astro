@@ -1,0 +1,29 @@
+---
+import { NAV_ITEMS } from "$/config";
+---
+
+<nav>
+  <ul>
+    {
+      Object.values(NAV_ITEMS).map((item) => (
+        <li>
+          <a href={item.path} title={item.title}>
+            {item.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  nav {
+    @apply py-2 text-theme-primary border-b border-theme-gray-dark mb-9;
+  }
+  ul {
+    @apply inline-flex list-none gap-8 text-2xl font-semibold py-2 flex-wrap;
+  }
+  a {
+    @apply capitalize tracking-wider hover:underline;
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-layout: $/layouts/BaseLayout.astro
+layout: $/layouts/MarkdownLayout.astro
 title: À propos
 description: À propos
 ---
@@ -16,7 +16,7 @@ On peut également ajouter à notre lexique:
 - **guinze** &rarr; grosse guindaille,
 - **être guinzé** &rarr; être vraiment bien imbibé.
 
-> **"Oufti, sacrée guindaille, hier soir! J'étais guinzé de chez guinzé, dèdjeu!"**, Willy (atteint
+> **'Oufti, sacrée guindaille, hier soir! J'étais guinzé de chez guinzé, dèdjeu!'**, Willy (atteint
 > d'un syndrôme encéphalorectal sévère, le lendemain de la veille).
 
 

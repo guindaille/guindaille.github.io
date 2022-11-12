@@ -2,13 +2,6 @@ import { MarkdownInstance } from "astro";
 import readingTime from "reading-time";
 import { PostMetadata } from "$/types";
 
-export const toTitleCase = (str: string) => str.replace(
-  /\w\S*/g,
-  function (txt) {
-    return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
-  }
-);
-
 export function getPosts(files: MarkdownInstance<PostMetadata>[], { take }: { take?: number } = {}) {
   const sliceArgs = [0];
   if (Number.isInteger(take)) {

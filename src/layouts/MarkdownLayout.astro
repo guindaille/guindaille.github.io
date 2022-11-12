@@ -1,0 +1,9 @@
+---
+import BaseLayout from "$/layouts/BaseLayout.astro";
+import Prose from "$/components/Prose.astro";
+---
+<BaseLayout content={Astro.props.content}>
+  <Prose>
+    <slot />
+  </Prose>
+</BaseLayout>

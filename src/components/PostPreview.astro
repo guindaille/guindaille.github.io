@@ -10,36 +10,37 @@ const { slug } = getPostData(post);
 const href = `/blog/${slug}`;
 ---
 <div class="post-preview">
-    <div class="sm:w-20 md:w-32">
-        <div class="post-preview__date">
-            <span class="post-preview__date__day">{day}</span>
-            <span class="post-preview__date__month-n-year">{monthNYear}</span>
-        </div>
+    <div class="date">
+        <span class="day">{day}</span>
+        <span class="month-n-year">{monthNYear}</span>
     </div>
-    <div class="flex-1">
-        <h4 class="post-preview__title">
+    <div class="list">
+        <h4 class="title">
             <a href={href} title={title}>{title}</a>
         </h4>
-        <p class="post-preview__desc">{description}</p>
+        <p class="desc">{description}</p>
     </div>
 </div>
 <style>
     .post-preview {
-        @apply  flex gap-6;
+        @apply flex gap-6;
     }
-    .post-preview__date {
-        @apply flex flex-col w-full text-center;
+    .date {
+        @apply flex flex-col w-full text-center text-theme-gray sm:w-20 md:w-32;
     }
-    .post-preview__date__day {
-        @apply text-6xl font-semibold text-gray-500 dark:text-gray-300;
+    .day {
+        @apply text-6xl;
     }
-    .post-preview__date__month-n-year {
-        @apply text-gray-400;
+    .month-n-year {
+        @apply text-base;
     }
-    .post-preview__title {
-        @apply text-2xl font-semibold text-theme-primary dark:text-theme-dark-primary hover:underline mb-2;
+    .list {
+        @apply flex-1;
     }
-    .post-preview__desc {
-        @apply text-lg leading-6 line-clamp-2 dark:text-white;
+    .title {
+        @apply text-2xl font-semibold text-theme-secondary capitalize hover:underline mb-2;
+    }
+    .desc {
+        @apply text-lg text-theme-gray-light leading-6 line-clamp-2;
     }
 </style>

@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
-import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +12,8 @@ export default defineConfig({
       [remarkToc, { tight: true, heading: "Sommaire" }],
     ],
   },
-  integrations: [sitemap()]
+  integrations: [
+    sitemap(),
+    tailwind(),
+  ],
 });

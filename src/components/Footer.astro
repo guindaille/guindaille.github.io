@@ -5,11 +5,18 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} par {SITE.name}. Créé avec <a href="https://astro.build">Astro</a>.
+	<p>
+		&copy; {today.getFullYear()} par <span>{SITE.name}</span>. Créé avec <a href="https://astro.build">Astro</a>.
+	</p>
 </footer>
 <style>
 	footer {
-		padding: 25px;
-		text-align: center;
+		@apply flex justify-center py-6 italic text-theme-gray-dark border-t border-theme-gray-dark;
+	}
+	span, a {
+		@apply not-italic text-theme-gray;
+	}
+	a {
+		@apply hover:underline;
 	}
 </style>

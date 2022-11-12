@@ -6,8 +6,17 @@ const content = { description: "Accueil" };
 ---
 
 <BaseLayout content={content}>
-    Bienvenue sur le blog de Guindaille Beer Crafting!
-
+    <p>Bienvenue sur le blog de Guindaille Beer Crafting!</p>
     <h2>Derniers articles publiés</h2>
+
     <PostPreviewList take={3} />
 </BaseLayout>
+
+<style>
+    p {
+        @apply text-lg text-theme-gray-light;
+    }
+    h2 {
+        @apply text-4xl font-bold py-6 text-theme-primary;
+    }
+</style>

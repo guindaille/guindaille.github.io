@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "$/layouts/BaseLayout.astro";
-import PostPreview from "$/components/PostPreview.astro";
+import PostPreviewList from "$/components/PostPreviewList.astro";
 import { PostMetadata } from "$/types";
 import { getPosts } from "$/utils";
 import { MarkdownInstance } from "astro";
@@ -26,7 +26,14 @@ const title = `Articles #${tag.toString().toUpperCase()}`;
 
 <BaseLayout content={{ title }}>
   <h1>Articles avec l'étiquette: <em>{tag}</em></h1>
-  <ul>
-    {posts.map((post) => <PostPreview post={post} />)}
-  </ul>
+  <PostPreviewList posts={posts} />
 </BaseLayout>
+
+<style>
+  h1 {
+    @apply text-5xl font-bold text-theme-primary capitalize py-6;
+  }
+  em {
+    @apply normal-case font-medium text-theme-secondary;
+  }
+</style>
