@@ -4,7 +4,7 @@ title: À propos
 description: À propos
 ---
 
-# À propos de la guindaille
+# La guindaille?
 Ça peut vouloir dire plusieurs choses, Wikipédia vous en apprendra plus sur [la guindaille](https://fr.wikipedia.org/wiki/Guindaille).
 
 Mais dans ce cas, on pense notamment à:
@@ -20,7 +20,7 @@ On peut également ajouter à notre lexique:
 > d'un syndrôme encéphalorectal sévère, le lendemain de la veille).
 
 
-# À propos de l'auteur
+# L'auteur?
 Moi, c'est Bruno.
 
 Guindailleur, développeur et bidouilleur en cours de formation brasseur amateur.
@@ -33,7 +33,7 @@ Vu que je bidouille, j'ai choisi de bricoler un truc maison et de documenter l'a
 en cours de route.
 
 
-# À propos du projet
+# Le projet?
 L'idée c'est de monter en DIY une cuve de brassage entre 35 et 55l,
 pour permettre de se faire la main sur des petits brassins tests d'environ 20 à 30l.
 

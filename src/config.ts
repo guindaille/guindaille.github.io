@@ -15,6 +15,6 @@ export const NAV_ITEMS: NavItems = {
   },
   about: {
     path: "/a-propos",
-    title: "a propos"
+    title: "à propos"
   }
 };

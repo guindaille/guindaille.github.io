@@ -3,7 +3,14 @@ import BaseLayout from "$/layouts/BaseLayout.astro";
 import Prose from "$/components/Prose.astro";
 ---
 <BaseLayout content={Astro.props.content}>
+  <h1 class="title">{ Astro.props.content.title }</h1>
   <Prose>
     <slot />
   </Prose>
 </BaseLayout>
+
+<style>
+  h1 {
+    @apply capitalize text-5xl text-theme-primary font-extrabold pb-9;
+  }
+</style>
