@@ -21,6 +21,7 @@ const { readingTime, slug } = getPostData(post);
 const permalink = `/blog/${slug}`;
 const { Content, frontmatter } = post;
 const { author, title, description, tags, publishedDate, lastEditDate, coverUrl } = frontmatter;
+const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { dateStyle: "medium" });
 ---
 <BaseLayout content={{title, description}}>
   <div class="header">
@@ -35,10 +36,10 @@ const { author, title, description, tags, publishedDate, lastEditDate, coverUrl 
     <h5 class="desc">
         <span class="author">{ author }</span>
         {publishedDate && <>
-          | <span class="date">{ new Intl.DateTimeFormat("fr-BE", { dateStyle: "full" }).format(new Date(publishedDate))}</span>
-        </>}
-        {lastEditDate && <>
-          | <span class="date">modifié le { new Intl.DateTimeFormat("fr-BE", { dateStyle: "short" }).format(new Date(lastEditDate))}</span>
+          | <span class="date">
+              {format(publishedDate)}
+              {lastEditDate && <> (màj {format(lastEditDate)})</>} 
+            </span>
         </>}
         | <span class="readtime"><time>{readingTime}</time></span>
         | <span class="permalink"><a href={permalink}>permalien</a></span>
