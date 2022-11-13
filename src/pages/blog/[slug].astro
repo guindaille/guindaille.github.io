@@ -28,7 +28,7 @@ const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { da
     <div class="tags">
       {tags && tags.map((tag) => (
         <i>
-          <a class="tag" href={`/tags/${tag}`} title={tag}>{tag}</a>
+          <a class="tag" href={`/tags/${tag}`} title={tag}>#{tag}</a>
         </i>
       ))}
     </div>
