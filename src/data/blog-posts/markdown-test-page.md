@@ -20,6 +20,7 @@ This page is an adapted version of [markdown-test-page](https://github.com/fullp
 - [Horizontal rule](#Horizontal)
 - [Table](#Table)
 - [Code](#Code)
+- [Diagrams](#diagrams)
 - [Inline elements](#Inline)
 
 ---
@@ -188,6 +189,260 @@ Ex amet id ex aliquip id do laborum excepteur exercitation elit sint commodo occ
 
 [[Top]](#top)
 
+# Diagrams
+
+## Using mermaid
+
+- Sequence diagram:
+```mermaid
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "darkMode": "true",
+      "fontFamily": "Fira Code",
+      "background": "#1f2937",
+      "primaryTextColor": "#f9fafb",
+      "primaryColor": "#65a30d",
+      "secondaryColor": "#d97706",
+      "tertiaryColor": "#4b5563",
+      "noteBkgColor": "#4b5563",
+      "noteTextColor": "#fcd34d"
+    }
+  }
+}%%
+        sequenceDiagram
+          autonumber
+          par Action 1
+            Alice->>John: Hello John, how are you?
+          and Action 2
+            Alice->>Bob: Hello Bob, how are you?
+          end
+          Alice->>+John: Hello John, how are you?
+          Alice->>+John: John, can you hear me?
+          John-->>-Alice: Hi Alice, I can hear you!
+          Note right of John: John is perceptive
+          John-->>-Alice: I feel great!
+              loop Every minute
+                John-->Alice: Great!
+            end
+```
+
+- Flow chart:
+```mermaid
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "darkMode": "true",
+      "fontFamily": "Fira Code",
+      "background": "#1f2937",
+      "primaryTextColor": "#f9fafb",
+      "primaryColor": "#65a30d",
+      "secondaryColor": "#d97706",
+      "tertiaryColor": "#4b5563",
+      "noteBkgColor": "#4b5563",
+      "noteTextColor": "#fcd34d"
+    }
+  }
+}%%
+flowchart LR
+    A[Hard edge] -->|Link text| B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+```
+
+- Class diagram:
+```mermaid
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "darkMode": "true",
+      "fontFamily": "Fira Code",
+      "background": "#1f2937",
+      "primaryTextColor": "#f9fafb",
+      "primaryColor": "#65a30d",
+      "secondaryColor": "#d97706",
+      "tertiaryColor": "#4b5563",
+      "noteBkgColor": "#4b5563",
+      "noteTextColor": "#fcd34d"
+    }
+  }
+}%%
+classDiagram
+    Animal "1" <|-- Duck
+    Animal <|-- Fish
+    Animal <--o Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+```
+
+- Gantt:
+```mermaid
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "darkMode": "true",
+      "fontFamily": "Fira Code",
+      "background": "#1f2937",
+      "primaryTextColor": "#f9fafb",
+      "primaryColor": "#65a30d",
+      "secondaryColor": "#d97706",
+      "tertiaryColor": "#4b5563",
+      "noteBkgColor": "#4b5563",
+      "noteTextColor": "#fcd34d"
+    }
+  }
+}%%
+gantt
+       dateFormat                YYYY-MM-DD
+       title                     Adding GANTT diagram functionality to mermaid
+       excludes                  :excludes the named dates/days from being included in a charted task..
+       section A section
+       Completed task            :done,    des1, 2014-01-06,2014-01-08
+       Active task               :active,  des2, 2014-01-09, 3d
+       Future task               :         des3, after des2, 5d
+       Future task2              :         des4, after des3, 5d
+
+       section Critical tasks
+       Completed task in the critical line :crit, done, 2014-01-06,24h
+       Implement parser and jison          :crit, done, after des1, 2d
+       Create tests for parser             :crit, active, 3d
+       Future task in critical line        :crit, 5d
+       Create tests for renderer           :2d
+       Add to mermaid                      :1d
+
+       section Documentation
+       Describe gantt syntax               :active, a1, after des1, 3d
+       Add gantt diagram to demo page      :after a1  , 20h
+       Add another diagram to demo page    :doc1, after a1  , 48h
+
+       section Last section
+       Describe gantt syntax               :after doc1, 3d
+       Add gantt diagram to demo page      :20h
+       Add another diagram to demo page    :48h
+```
+
+- State diagram:
+```mermaid
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "darkMode": "true",
+      "fontFamily": "Fira Code",
+      "background": "#1f2937",
+      "primaryTextColor": "#f9fafb",
+      "primaryColor": "#65a30d",
+      "secondaryColor": "#d97706",
+      "tertiaryColor": "#4b5563",
+      "noteBkgColor": "#4b5563",
+      "noteTextColor": "#fcd34d"
+    }
+  }
+}%%
+      stateDiagram
+        [*] --> Active
+
+        state Active {
+            [*] --> NumLockOff
+            NumLockOff --> NumLockOn : EvNumLockPressed
+            NumLockOn --> NumLockOff : EvNumLockPressed
+            --
+            [*] --> CapsLockOff
+            CapsLockOff --> CapsLockOn : EvCapsLockPressed
+            CapsLockOn --> CapsLockOff : EvCapsLockPressed
+            --
+            [*] --> ScrollLockOff
+            ScrollLockOff --> ScrollLockOn : EvCapsLockPressed
+            ScrollLockOn --> ScrollLockOff : EvCapsLockPressed
+        }
+        state SomethingElse {
+          A --> B
+          B --> A
+        }
+
+        Active --> SomethingElse
+        note right of SomethingElse : This is the note to the right.
+
+        SomethingElse --> [*]
+```
+
+- Journey diagram:
+```mermaid
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "darkMode": "true",
+      "fontFamily": "Fira Code",
+      "background": "#1f2937",
+      "primaryTextColor": "#f9fafb",
+      "primaryColor": "#65a30d",
+      "secondaryColor": "#d97706",
+      "tertiaryColor": "#4b5563",
+      "noteBkgColor": "#4b5563",
+      "noteTextColor": "#fcd34d"
+    }
+  }
+}%%
+journey
+            title My working day
+            section Go to work
+              Make tea: 5: Me
+              Go upstairs: 3: Me
+              Do work: 1: Me, Cat
+            section Go home
+              Go downstairs: 5: Me
+              Sit down: 5: Me
+```
+
+- Pie chart:
+```mermaid
+%%{
+  init: {
+    "theme": "base",
+    "themeVariables": {
+      "darkMode": "true",
+      "fontFamily": "Fira Code",
+      "background": "#1f2937",
+      "primaryTextColor": "#f9fafb",
+      "primaryColor": "#65a30d",
+      "secondaryColor": "#d97706",
+      "tertiaryColor": "#4b5563",
+      "noteBkgColor": "#4b5563",
+      "noteTextColor": "#fcd34d"
+    }
+  }
+}%%
+pie showData
+    title Key elements in Product X
+    "Calcium" : 42.96
+    "Potassium" : 50.05
+    "Magnesium" : 10.01
+    "Iron" :  5
+```
+
+[[Top]](#top)
+
 # <a name="Inline"></a>Inline elements
 
 Sint ea anim ipsum ad commodo cupidatat do **exercitation** incididunt et minim ad labore sunt. Minim deserunt labore laboris velit nulla incididunt ipsum nulla. Ullamco ad laborum ea qui et anim in laboris exercitation tempor sit officia laborum reprehenderit culpa velit quis. **Consequat commodo** reprehenderit duis [irure](#) esse esse exercitation minim enim Lorem dolore duis irure. Nisi Lorem reprehenderit ea amet excepteur dolor excepteur magna labore proident voluptate ipsum. Reprehenderit ex esse deserunt aliqua ea officia mollit Lorem nulla magna enim. Et ad ipsum labore enim ipsum **cupidatat consequat**. Commodo non ea cupidatat magna deserunt dolore ipsum velit nulla elit veniam nulla eiusmod proident officia.
@@ -203,3 +458,5 @@ Incididunt in culpa cupidatat mollit cillum qui proident sit. In cillum aliquip 
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/PCp2iXA1uLE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Reprehenderit non eu quis in ad elit esse qui aute id [incididunt](#) dolore cillum. Esse laboris consequat dolor anim exercitation tempor aliqua deserunt velit magna laboris. Culpa culpa minim duis amet mollit do quis amet commodo nulla irure.
+
+[[Top]](#top)

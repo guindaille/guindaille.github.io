@@ -1,5 +1,6 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import remarkToc from "remark-toc";
+import remarkMermaid from "astro-diagram/remark-mermaid";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
@@ -10,6 +11,7 @@ export default defineConfig({
     extendDefaultPlugins: true,
     remarkPlugins: [
       [remarkToc, { tight: true, heading: "Sommaire" }],
+      remarkMermaid,
     ],
   },
   integrations: [
