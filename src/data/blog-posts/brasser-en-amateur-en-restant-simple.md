@@ -6,7 +6,7 @@ description:
   Et pour le matériel, on a besoin de quoi?
 publishedDate: 2022-11-06
 author: Bruno
-tags: ["diy", "brassage"]
+tags: ["brassage"]
 ---
 Bon, au programme: on va essayer d'écrire cet article. Mais là, je vais pieuter, j'ai une vie :-D
 

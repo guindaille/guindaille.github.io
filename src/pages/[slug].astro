@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "$/layouts/BaseLayout.astro";
 import Prose from "$/components/Prose.astro";
+import Tag from "$/components/Tag.astro";
 import { PostMetadata } from "$/types";
 import { getPostData } from "$/utils";
 import { MarkdownInstance } from "astro";
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob("../../data/blog-posts/*.md");
+  const posts = await Astro.glob("../data/blog-posts/*.md");
   return posts.map(p => ({
     params: { slug: getPostData(p).slug },
     props: { post: p },
@@ -17,23 +18,15 @@ export interface Props {
 }
 
 const { post } = Astro.props;
-const { readingTime, slug } = getPostData(post);
-const permalink = `/blog/${slug}`;
+const { readingTime, permalink } = getPostData(post);
 const { Content, frontmatter } = post;
 const { author, title, description, tags, publishedDate, lastEditDate, coverUrl } = frontmatter;
 const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { dateStyle: "medium" });
 ---
 <BaseLayout content={{title, description}}>
   <div class="header">
-    <div class="tags">
-      {tags && tags.map((tag) => (
-        <i>
-          <a class="tag" href={`/tags/${tag}`} title={tag}>#{tag}</a>
-        </i>
-      ))}
-    </div>
     <h1 class="title">{ title }</h1>
-    <h5 class="desc">
+    <div class="desc">
         <span class="author">{ author }</span>
         {publishedDate && <>
           | <span class="date">
@@ -43,7 +36,10 @@ const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { da
         </>}
         | <span class="readtime"><time>{readingTime}</time></span>
         | <span class="permalink"><a href={permalink}>permalien</a></span>
-    </h5>
+    </div>
+    <div class="tags">
+      {tags && tags.map((tag) => <Tag name={tag} />)}
+    </div>
   </div>
   {coverUrl && <img width={720} height={360} src={coverUrl} alt={title} />}
   <Prose>
@@ -53,10 +49,10 @@ const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { da
 
 <style>
   .header {
-    @apply py-4 mb-1;
+    @apply mb-8;
   }
   .title {
-    @apply capitalize text-5xl text-theme-primary font-extrabold;
+    @apply capitalize text-4xl py-4 mb-4 text-theme-primary font-extrabold;
   }
   .desc {
     @apply text-xl;
@@ -74,10 +70,7 @@ const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { da
     @apply text-xl;
   }
   .tags {
-    @apply inline-flex gap-2;
-  }
-  .tag {
-    @apply text-sm;
+    @apply inline-flex gap-3 text-sm;
   }
   a {
     @apply text-theme-secondary hover:text-theme-accent-light hover:underline;

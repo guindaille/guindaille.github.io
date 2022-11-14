@@ -6,12 +6,21 @@ const today = new Date();
 
 <footer>
 	<p>
-		&copy; {today.getFullYear()} par <span>{SITE.name}</span>. Créé avec <a href="https://astro.build">Astro</a>.
+		&copy; {today.getFullYear()} <span>{SITE.name}</span>
+	</p>
+	<p>
+		Créé avec <a href="https://astro.build">Astro</a>
 	</p>
 </footer>
 <style>
 	footer {
-		@apply flex justify-center py-6 italic text-theme-gray-dark border-t border-theme-gray-dark;
+		@apply text-center py-6 italic text-theme-gray-dark border-t border-theme-gray-dark;
+	}
+	p:first-child {
+		@apply text-sm mb-2;
+	}
+	p:last-child {
+		@apply text-xs;
 	}
 	span, a {
 		@apply not-italic text-theme-gray;

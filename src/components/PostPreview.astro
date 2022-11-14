@@ -6,8 +6,7 @@ const { title, description, publishedDate } = post.frontmatter;
 const date = new Date(publishedDate);
 const day = date.toLocaleDateString("fr-BE", { day: "numeric" });
 const monthNYear = date.toLocaleDateString("fr-BE", { month: "long", year: "numeric" });
-const { slug } = getPostData(post);
-const href = `/blog/${slug}`;
+const { permalink } = getPostData(post);
 ---
 <div class="post-preview">
     <div class="date">
@@ -16,7 +15,7 @@ const href = `/blog/${slug}`;
     </div>
     <div class="list">
         <h4 class="title">
-            <a href={href} title={title}>{title}</a>
+            <a href={permalink} title={title}>{title}</a>
         </h4>
         <p class="desc">{description}</p>
     </div>
@@ -26,7 +25,7 @@ const href = `/blog/${slug}`;
         @apply flex gap-6;
     }
     .date {
-        @apply flex flex-col w-full text-center text-theme-gray sm:w-20 md:w-32;
+        @apply flex flex-col w-full text-center text-theme-gray sm:w-12 md:w-32;
     }
     .day {
         @apply text-6xl;
@@ -35,12 +34,12 @@ const href = `/blog/${slug}`;
         @apply text-base;
     }
     .list {
-        @apply flex-1;
+        @apply flex-auto;
     }
     .title {
         @apply text-2xl font-semibold text-theme-secondary capitalize hover:underline mb-2;
     }
     .desc {
-        @apply text-lg text-theme-gray-light leading-6 line-clamp-2;
+        @apply text-lg text-theme-gray-light leading-6;
     }
 </style>

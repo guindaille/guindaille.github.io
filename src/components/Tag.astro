@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon";
+
+const { name, ...props } = Astro.props;
+---
+
+<div>
+  <a href={`/tags/${name}`} title={`Articles #${name}`} {...props}>
+    <span class="icon"><Icon name="twemoji:beer-mug" /></span>
+    <span class="name">{name}</span>
+  </a>
+</div>
+
+<style>
+  div {
+    @apply inline-block text-theme-secondary;
+  }
+  a {
+    @apply flex gap-0.5 items-center italic lowercase hover:underline;
+    /* transform: translate(0, 0.125em); */
+  }
+  span.icon {
+    width: 1.5ex;
+    /* transform: translate(0, -0.0625em); */
+    @apply h-full;
+  }
+  span.name {
+    @apply min-w-max tracking-tighter;
+  }
+  [astro-icon] {
+    @apply h-fit w-fit;
+  }
+</style>

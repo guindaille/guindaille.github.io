@@ -15,8 +15,24 @@ export function getPosts(files: MarkdownInstance<PostMetadata>[], { take }: { ta
 
 export function getPostData(post) {
   const { minutes } = readingTime(post.rawContent())
+  const slug = post.file.split("/blog-posts/").pop().split(".").shift();
   return {
-    slug: post.file.split("/blog-posts/").pop().split(".").shift(),
+    permalink: `/${slug}`,
+    slug,
     readingTime: `${Math.ceil(minutes)} min`,
   };
+}
+
+export function getTagsWithPosts(files: MarkdownInstance<PostMetadata>[]) {
+  const tags = new Map<string, MarkdownInstance<PostMetadata>[]>();
+  for (const post of getPosts(files)) {
+    const uniqueTags = new Set(post.frontmatter.tags);
+    for (const tag of uniqueTags) {
+      if (!tags.has(tag)) {
+        tags.set(tag, []);
+      }
+      tags.get(tag).push(post);
+    }
+  }
+  return tags;
 }

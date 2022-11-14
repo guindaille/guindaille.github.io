@@ -1,16 +1,21 @@
 ---
-import { NAV_ITEMS } from "$/config";
+import Tag from "$/components/Tag.astro";
+import { PostMetadata } from "$/types";
+import { getTagsWithPosts } from "$/utils";
+
+const files = await Astro.glob<PostMetadata>("../data/blog-posts/*.md");
+const tags = getTagsWithPosts(files);
+const tagsWithCount = Array.from(tags.entries())
+    .map(([tag, posts]) => ({ tag, count: posts.length }))
+    .sort((a, b) => a.tag.localeCompare(b.tag)) // sort: tag ASC
+    .sort((a, b) => b.count - a.count); // sort: count DESC
 ---
 
 <nav>
   <ul>
     {
-      Object.values(NAV_ITEMS).map((item) => (
-        <li>
-          <a href={item.path} title={item.title}>
-            {item.title}
-          </a>
-        </li>
+      tagsWithCount.map(({ tag }) => (
+        <li><Tag name={tag} class="ring-2 ring-theme-gray-dark rounded-2xl px-3 py-2 hover:ring-theme-primary" /></li>
       ))
     }
   </ul>
@@ -18,12 +23,9 @@ import { NAV_ITEMS } from "$/config";
 
 <style>
   nav {
-    @apply py-2 text-theme-primary border-b border-theme-gray-dark mb-9;
+    @apply py-4 mb-4 border-b border-theme-gray-dark text-xl font-semibold;
   }
   ul {
-    @apply inline-flex list-none gap-8 text-2xl font-semibold py-2 flex-wrap;
-  }
-  a {
-    @apply capitalize tracking-wider hover:underline;
+    @apply inline-flex list-none gap-5 px-4 justify-evenly w-full leading-3 flex-wrap;
   }
 </style>

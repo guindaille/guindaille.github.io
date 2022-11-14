@@ -1,10 +1,15 @@
 ---
-const { page } = Astro.props
+const { page } = Astro.props;
+const { next, prev } = page.url;
+const displayPaginator = next || prev;
 ---
-<div>
-    {page.url.prev && <a href={page.url.prev} title="Aller au précédent">&larr; Précédent</a>}
-    {page.url.next && <a href={page.url.next} title="Aller au suivant">Suivant &rarr;</a>}
-</div>
+{displayPaginator &&
+    <div>
+        {prev && <a href={prev} title="Aller au précédent">&larr; Précédent</a>}
+        {next && <a href={next} title="Aller au suivant">Suivant &rarr;</a>}
+    </div>
+}
+
 <style>
     div {
         @apply flex justify-center md:justify-end py-6 gap-4;

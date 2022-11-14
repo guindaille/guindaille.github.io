@@ -1,0 +1,39 @@
+---
+import BaseLayout from "$/layouts/BaseLayout.astro";
+import Paginator from "$/components/Paginator.astro";
+import PostPreviewList from "$/components/PostPreviewList.astro";
+import { SITE } from "$/config";
+import { PostMetadata } from "$/types";
+import { getPosts } from "$/utils";
+
+export async function getStaticPaths({ paginate }) {
+  const files = await Astro.glob<PostMetadata>("../data/blog-posts/*.md");
+  const posts = getPosts(files);
+  return paginate(posts, { pageSize: SITE.postsPerPage });
+}
+const { page } = Astro.props;
+const exageratedTitles = [
+  "Les dernières nouvelles",
+  "Articles moins récents",
+  "Billets plus anciens",
+  "Articles un peu plus vieux encore",
+  "Nouvelles beaucoup plus anciennes",
+  "Billets énormément plus vieux",
+  "Articles vraiment très très vieux",
+  "Billets trop anciens",
+  "Articles beaucoup trop anciens",
+  "Alors, là, ce sont des articles vraiment beaucoup trop anciens et méga vieux",
+];
+const title = exageratedTitles[page.currentPage - 1] || "Qui remonte aussi loin dans l'histoire ?!";
+---
+<BaseLayout content={{ description: SITE.name }}>
+    <h1>{title}</h1>
+    <PostPreviewList posts={page.data} />
+    <Paginator page={page} />
+</BaseLayout>
+
+<style>
+    h1 {
+        @apply text-4xl capitalize font-bold py-4 mb-4 text-theme-primary;
+    }
+</style>

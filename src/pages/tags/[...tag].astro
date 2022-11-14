@@ -1,22 +1,14 @@
 ---
 import BaseLayout from "$/layouts/BaseLayout.astro";
 import PostPreviewList from "$/components/PostPreviewList.astro";
+import Tag from "$/components/Tag.astro";
 import { PostMetadata } from "$/types";
-import { getPosts } from "$/utils";
-import { MarkdownInstance } from "astro";
+import { getTagsWithPosts } from "$/utils";
 
 export async function getStaticPaths() {
   const files = await Astro.glob<PostMetadata>("../../data/blog-posts/*.md");
-    const postsByTags = new Map<string, MarkdownInstance<PostMetadata>[]>();
-  for (const post of getPosts(files)) {
-    for (const tag of post.frontmatter.tags) {
-      if (!postsByTags.has(tag)) {
-        postsByTags.set(tag, []);
-      }
-      postsByTags.get(tag).push(post);
-    }
-  }
-  return Array.from(postsByTags.entries()).map(([tag, posts]) => ({ params: { tag }, props: { posts } }));
+  const tags = getTagsWithPosts(files);
+  return Array.from(tags.entries()).map(([tag, posts]) => ({ params: { tag }, props: { posts } }));
 }
 
 const { tag } = Astro.params;
@@ -25,15 +17,12 @@ const title = `Articles #${tag.toString().toUpperCase()}`;
 ---
 
 <BaseLayout content={{ title }}>
-  <h1>Les articles <em>#{tag}</em></h1>
+  <h1>Articles <Tag name={tag} /></h1>
   <PostPreviewList posts={posts} />
 </BaseLayout>
 
 <style>
   h1 {
-    @apply text-5xl font-bold text-theme-primary capitalize py-6;
-  }
-  em {
-    @apply normal-case font-medium text-theme-secondary;
+    @apply flex flex-wrap gap-4 text-4xl py-4 mb-4 font-bold text-theme-primary capitalize;
   }
 </style>
