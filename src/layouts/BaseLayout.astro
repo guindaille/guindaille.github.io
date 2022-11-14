@@ -9,7 +9,7 @@ const { content } = Astro.props;
 const pageTitle = content.title ? `${content.title} 🍺 ${SITE.name}` : SITE.name;
 ---
 
-<html lang="{SITE.lang}">
+<html lang={SITE.lang}>
   <head>
     <BaseHead
       title={ pageTitle }
