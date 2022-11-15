@@ -13,6 +13,9 @@ export default defineConfig({
       [remarkToc, { tight: true, heading: "Sommaire" }],
       remarkMermaid,
     ],
+    shikiConfig: {
+      theme: "dracula-soft",
+    },
   },
   integrations: [
     sitemap(),
