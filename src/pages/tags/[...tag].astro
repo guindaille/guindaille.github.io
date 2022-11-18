@@ -6,7 +6,7 @@ import { PostMetadata } from "$/types";
 import { getTagsWithPosts } from "$/utils";
 
 export async function getStaticPaths() {
-  const files = await Astro.glob<PostMetadata>("../../data/blog-posts/*.md");
+  const files = await Astro.glob<PostMetadata>("../../data/blog-posts/**/*.md");
   const tags = getTagsWithPosts(files);
   return Array.from(tags.entries()).map(([tag, posts]) => ({ params: { tag }, props: { posts } }));
 }

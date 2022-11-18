@@ -7,7 +7,7 @@ import { getPostData } from "$/utils";
 import { MarkdownInstance } from "astro";
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob("../data/blog-posts/*.md");
+  const posts = await Astro.glob<PostMetadata>("../data/blog-posts/**/*.md");
   return posts.map(p => ({
     params: { slug: getPostData(p).slug },
     props: { post: p },

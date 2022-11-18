@@ -1,6 +1,6 @@
 import { MarkdownInstance } from "astro";
-import readingTime from "reading-time";
 import { PostMetadata } from "$/types";
+import readingTime from "reading-time";
 
 export function getPosts(files: MarkdownInstance<PostMetadata>[], { take }: { take?: number } = {}) {
   const sliceArgs = [0];
@@ -13,9 +13,10 @@ export function getPosts(files: MarkdownInstance<PostMetadata>[], { take }: { ta
     .slice(...sliceArgs);
 }
 
-export function getPostData(post) {
+export function getPostData(post: MarkdownInstance<PostMetadata>) {
   const { minutes } = readingTime(post.rawContent())
-  const slug = post.file.split("/blog-posts/").pop().split(".").shift();
+  const pathWithoutExt = post.file.split("/blog-posts/").pop().split(".").shift();
+  const slug = pathWithoutExt.split("/").join("-");
   return {
     permalink: `/${slug}`,
     slug,

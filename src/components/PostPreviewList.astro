@@ -6,7 +6,7 @@ import PostPreview from "./PostPreview.astro";
 
 const { posts: receivedPosts, take = SITE.postsPerPage } = Astro.props;
 const posts = receivedPosts
-    || getPosts(await Astro.glob<PostMetadata>("../data/blog-posts/*.md"), { take });
+    || getPosts(await Astro.glob<PostMetadata>("../data/blog-posts/**/*.md"), { take });
 ---
 <section>
     {posts.map((post) => (

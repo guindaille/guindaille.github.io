@@ -3,7 +3,7 @@ import Tag from "$/components/Tag.astro";
 import { PostMetadata } from "$/types";
 import { getTagsWithPosts } from "$/utils";
 
-const files = await Astro.glob<PostMetadata>("../data/blog-posts/*.md");
+const files = await Astro.glob<PostMetadata>("../data/blog-posts/**/*.md");
 const tags = getTagsWithPosts(files);
 const tagsWithCount = Array.from(tags.entries())
     .map(([tag, posts]) => ({ tag, count: posts.length }))

@@ -7,7 +7,7 @@ import { PostMetadata } from "$/types";
 import { getPosts } from "$/utils";
 
 export async function getStaticPaths({ paginate }) {
-  const files = await Astro.glob<PostMetadata>("../data/blog-posts/*.md");
+  const files = await Astro.glob<PostMetadata>("../data/blog-posts/**/*.md");
   const posts = getPosts(files);
   return paginate(posts, { pageSize: SITE.postsPerPage });
 }
