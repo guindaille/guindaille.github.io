@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import image from "@astrojs/image";
 import remarkToc from "remark-toc";
 import remarkMermaid from "astro-diagram/remark-mermaid";
 import sitemap from "@astrojs/sitemap";
@@ -18,6 +19,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    image({ serviceEntryPoint: "@astrojs/image/sharp" }),
     sitemap(),
     tailwind(),
   ],

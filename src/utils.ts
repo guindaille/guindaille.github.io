@@ -37,3 +37,9 @@ export function getTagsWithPosts(files: MarkdownInstance<PostMetadata>[]) {
   }
   return tags;
 }
+
+export const dynamicImport = (url: string) => {
+  const path = url.replace(/^\$\//g, "/src/");
+  // fixme: won't work in prod for relative imports
+  return import.meta.env.PROD ? `.${path}` : import(/* @vite-ignore */path);
+}

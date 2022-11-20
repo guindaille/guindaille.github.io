@@ -3,8 +3,9 @@ import BaseLayout from "$/layouts/BaseLayout.astro";
 import Prose from "$/components/Prose.astro";
 import Tag from "$/components/Tag.astro";
 import { PostMetadata } from "$/types";
-import { getPostData } from "$/utils";
+import { dynamicImport, getPostData } from "$/utils";
 import { MarkdownInstance } from "astro";
+import { Image } from "@astrojs/image/components";
 
 export async function getStaticPaths() {
   const posts = await Astro.glob<PostMetadata>("../data/blog-posts/**/*.md");
@@ -20,7 +21,7 @@ export interface Props {
 const { post } = Astro.props;
 const { readingTime, permalink } = getPostData(post);
 const { Content, frontmatter } = post;
-const { author, title, description, tags, publishedDate, lastEditDate, coverUrl } = frontmatter;
+const { author, title, description, tags, publishedDate, lastEditDate, coverPath } = frontmatter;
 const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { dateStyle: "medium" });
 ---
 <BaseLayout content={{title, description}}>
@@ -41,7 +42,7 @@ const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { da
       {tags && tags.map((tag) => <Tag name={tag} />)}
     </div>
   </div>
-  {coverUrl && <img width={720} height={360} src={coverUrl} alt={title} />}
+  {coverPath && <Image aspectRatio={16/9} width={960} src={dynamicImport(coverPath)} alt={title} />}
   <Prose>
     <Content />
   </Prose>

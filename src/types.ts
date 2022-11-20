@@ -5,5 +5,5 @@ export type PostMetadata = {
   tags?: string[];
   publishedDate?: string;
   lastEditDate?: string;
-  coverUrl?: string;
+  coverPath?: string;
 };
