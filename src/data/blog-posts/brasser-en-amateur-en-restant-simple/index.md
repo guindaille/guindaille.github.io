@@ -4,7 +4,7 @@ description:
   Comment on fait pour faire de la bière en amateur?
   Quelles techniques sont les mieux adaptées?
   Et pour le matériel, on a besoin de quoi?
-publishedDate: 2022-11-06
+publishDate: 2022-11-06
 author: Bruno
 tags: ["brassage"]
 ---

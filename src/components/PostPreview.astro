@@ -2,8 +2,8 @@
 import { getPostData } from "$/utils";
 
 const { post } = Astro.props;
-const { title, description, publishedDate } = post.frontmatter;
-const date = new Date(publishedDate);
+const { title, description, publishDate } = post.frontmatter;
+const date = new Date(publishDate);
 const day = date.toLocaleDateString("fr-BE", { day: "numeric" });
 const monthNYear = date.toLocaleDateString("fr-BE", { month: "long", year: "numeric" });
 const { permalink } = getPostData(post);
