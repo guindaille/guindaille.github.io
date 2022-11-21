@@ -3,7 +3,7 @@ export type PostMetadata = {
   description: string;
   author: string;
   tags?: string[];
-  publishedDate?: string;
-  lastEditDate?: string;
+  publishDate?: string;
+  editDate?: string;
   coverPath?: string;
 };

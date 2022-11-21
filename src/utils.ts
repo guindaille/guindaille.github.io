@@ -8,15 +8,15 @@ export function getPosts(files: MarkdownInstance<PostMetadata>[], { take }: { ta
     sliceArgs.push(take);
   }
   return files
-    .filter((post) => new Date(post.frontmatter.publishedDate) < new Date())
-    .sort((a, b) => (new Date(b.frontmatter.publishedDate)).valueOf() - (new Date(a.frontmatter.publishedDate)).valueOf())
+    .filter((post) => new Date(post.frontmatter.publishDate) < new Date())
+    .sort((a, b) => (new Date(b.frontmatter.publishDate)).valueOf() - (new Date(a.frontmatter.publishDate)).valueOf())
     .slice(...sliceArgs);
 }
 
 export function getPostData(post: MarkdownInstance<PostMetadata>) {
   const { minutes } = readingTime(post.rawContent())
   const pathWithoutExt = post.file.split("/blog-posts/").pop().split(".").shift();
-  const slug = pathWithoutExt.split("/").join("-");
+  const slug = pathWithoutExt.replace(/\/index$/g, "").split("/").join("-");
   return {
     permalink: `/${slug}`,
     slug,
@@ -39,7 +39,5 @@ export function getTagsWithPosts(files: MarkdownInstance<PostMetadata>[]) {
 }
 
 export const dynamicImport = (url: string) => {
-  const path = url.replace(/^\$\//g, "/src/");
-  // fixme: won't work in prod for relative imports
-  return import.meta.env.PROD ? `.${path}` : import(/* @vite-ignore */path);
+  return import.meta.env.PROD ? url : import(/* @vite-ignore */url);
 }

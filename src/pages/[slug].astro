@@ -21,7 +21,7 @@ export interface Props {
 const { post } = Astro.props;
 const { readingTime, permalink } = getPostData(post);
 const { Content, frontmatter } = post;
-const { author, title, description, tags, publishedDate, lastEditDate, coverPath } = frontmatter;
+const { author, title, description, tags, publishDate, editDate, coverPath } = frontmatter;
 const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { dateStyle: "medium" });
 ---
 <BaseLayout content={{title, description}}>
@@ -29,10 +29,10 @@ const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { da
     <h1 class="title">{ title }</h1>
     <div class="desc">
         <span class="author">{ author }</span>
-        {publishedDate && <>
+        {publishDate && <>
           | <span class="date">
-              {format(publishedDate)}
-              {lastEditDate && <> (màj {format(lastEditDate)})</>} 
+              {format(publishDate)}
+              {editDate && <> (màj {format(editDate)})</>} 
             </span>
         </>}
         | <span class="readtime"><time>{readingTime}</time></span>
@@ -42,7 +42,7 @@ const format = (date: string) => new Date(date).toLocaleDateString("fr-BE", { da
       {tags && tags.map((tag) => <Tag name={tag} />)}
     </div>
   </div>
-  {coverPath && <Image aspectRatio={16/9} width={960} src={dynamicImport(coverPath)} alt={title} />}
+  {coverPath && <Image aspectRatio={16/9} width={960} src={dynamicImport(`./public${coverPath}`)} alt={title} />}
   <Prose>
     <Content />
   </Prose>
